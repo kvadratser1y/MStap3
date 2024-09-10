@@ -17,6 +17,11 @@ const gameSection = document.getElementById('game-section');
 const nicknameSection = document.getElementById('nickname-section');
 const leaderboardSection = document.getElementById('leaderboard-section');
 
+// Добавляем элемент для эффекта
+const tapEffect = document.createElement('div');
+tapEffect.id = 'tap-effect';
+document.body.appendChild(tapEffect);
+
 // Отображение таблицы лидеров
 const updateLeaderboard = () => {
     const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
@@ -67,7 +72,7 @@ const checkEnergyRefill = () => {
 };
 
 // Обновляем количество тапов и энергию
-tapButton.addEventListener('click', () => {
+tapButton.addEventListener('click', (e) => {
     if (energy > 0) {
         tapCount++;
         energy--;
@@ -86,6 +91,18 @@ tapButton.addEventListener('click', () => {
 
         // Обновляем таблицу лидеров
         updateLeaderboard();
+
+        // Показ эффекта нажатия
+        const { left, top } = e.target.getBoundingClientRect();
+        tapEffect.style.left = `${left + e.target.clientWidth / 2 - 25}px`; // Центрируем по горизонтали
+        tapEffect.style.top = `${top + e.target.clientHeight / 2 - 25}px`; // Центрируем по вертикали
+        tapEffect.style.opacity = 1;
+        tapEffect.style.transform = 'translateY(-100px)';
+
+        setTimeout(() => {
+            tapEffect.style.opacity = 0;
+            tapEffect.style.transform = 'translateY(-200px)';
+        }, 50);
     } else {
         alert('Недостаточно энергии! Подождите или купите подписку.');
     }
