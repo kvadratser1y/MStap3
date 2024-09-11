@@ -2,37 +2,40 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <!-- Preventing zoom on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Tap Game</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-    <!-- Секция для ввода ника -->
+    <!-- Section for entering nickname -->
     <div id="nickname-section">
-        <h2>Введите ваш ник (только латинские символы и максимум 2 цифры):</h2>
+        <h2>Enter Your Nickname (Only Latin letters and up to 2 numbers):</h2>
         <form id="nickname-form">
             <input type="text" id="nickname-input" maxlength="10" required>
-            <button type="submit" class="subscribe-button">Сохранить</button>
+            <button type="submit" class="subscribe-button">Save</button>
         </form>
-        <p id="error-message" style="color: red;"></p>
+        <p id="error-message" class="error-message"></p>
     </div>
 
-    <!-- Секция игры (сначала скрыта) -->
+    <!-- Game Section (hidden initially) -->
     <div id="game-section" style="display: none;">
         <h2 id="nickname-display"></h2>
         <div class="counter">
             <img src="https://cdn-icons-png.flaticon.com/128/12546/12546441.png" alt="icon">
-            <p>Тапов: <span id="tap-count">0</span></p>
+            <p>Taps: <span id="tap-count">0</span></p>
         </div>
         <div class="tap-container">
             <button class="tap-button" id="tap-button">
-                <img src="https://cdn-icons-png.flaticon.com/128/16770/16770401.png" alt="tap-icon">
+                <img src="https://cdn-icons-png.flaticon.com/128/12546/12546441.png" alt="tap-icon">
             </button>
+            <!-- Tap Effect Element -->
+            <div id="tap-effect"></div>
         </div>
-        <p class="energy">Энергия: <span id="energy-count">5000</span></p>
-        <a href="https://paypal.com" class="subscribe-button">Купить подписку</a>
+        <p class="energy">Energy: <span id="energy-count">5000</span></p>
+        <a href="https://paypal.com" class="subscribe-button">Buy Subscription</a>
     </div>
 
     <script src="script.js"></script>
