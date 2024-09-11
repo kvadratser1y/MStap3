@@ -1,3 +1,4 @@
+/* General Styles */
 body {
     font-family: 'Montserrat', sans-serif;
     background-image: url('https://i.pinimg.com/originals/43/18/23/431823dd2958601f94c1a7b496c966c9.gif');
@@ -11,15 +12,21 @@ body {
     flex-direction: column;
 }
 
+/* Sections */
 #nickname-section,
 #game-section {
     text-align: center;
-    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
 }
 
 input {
     padding: 10px;
     font-size: 16px;
+    width: 80%;
+    max-width: 300px;
+    margin-bottom: 10px;
 }
 
 .subscribe-button {
@@ -30,6 +37,7 @@ input {
     color: white;
     text-decoration: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .subscribe-button:hover {
@@ -40,6 +48,7 @@ input {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 20px;
 }
 
 .counter img {
@@ -49,9 +58,11 @@ input {
 }
 
 .tap-container {
+    position: relative;
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    margin: 20px 0;
 }
 
 .tap-button {
@@ -66,11 +77,7 @@ input {
     height: 128px;
 }
 
-.energy {
-    font-size: 18px;
-    font-weight: bold;
-}
-
+/* Tap Effect */
 #tap-effect {
     position: absolute;
     width: 50px;
@@ -78,6 +85,20 @@ input {
     background: url('https://cdn-icons-png.flaticon.com/128/12546/12546441.png') no-repeat center center;
     background-size: cover;
     pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    transform: translateY(0);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+/* Energy Display */
+.energy {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Error Message */
+.error-message {
+    color: red;
+    font-size: 14px;
 }
