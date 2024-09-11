@@ -4,11 +4,15 @@ body {
     background-size: cover;
     margin: 0;
     padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
 }
 
 #nickname-section,
-#game-section,
-#leaderboard-section {
+#game-section {
     text-align: center;
     margin-top: 20px;
 }
@@ -32,18 +36,6 @@ input {
     background-color: #0056b3;
 }
 
-.tap-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-}
-
-.tap-button img {
-    width: 256px;
-    height: 256px;
-}
-
 .counter {
     display: flex;
     align-items: center;
@@ -56,38 +48,58 @@ input {
     margin-right: 10px;
 }
 
+.tap-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tap-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.tap-button img {
+    width: 128px;
+    height: 128px;
+}
+
 .energy {
     font-size: 18px;
     font-weight: bold;
-}
-
-table {
-    width: 80%;
-    margin: 20px auto;
-    border-collapse: collapse;
-}
-
-table, th, td {
-    border: 1px solid black;
-}
-
-th, td {
-    padding: 10px;
-    text-align: center;
 }
 
 #tap-effect {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: url('https://cdn-icons-png.flaticon.com/128/2470/2470164.png') no-repeat center center;
+    background: url('https://cdn-icons-png.flaticon.com/128/2470/2470166.png') no-repeat center center;
     background-size: cover;
     pointer-events: none;
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.5s, transform 0.5s;
 }
 
-.tap-button {
-    position: relative;
+.energy-timer {
+    font-size: 14px;
+    color: #ff0000;
 }
 
+#leaderboard {
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    border-collapse: collapse;
+}
+
+#leaderboard th, #leaderboard td {
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+#leaderboard th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
