@@ -2,104 +2,55 @@ body {
     font-family: 'Montserrat', sans-serif;
     background-image: url('https://i.pinimg.com/564x/47/9e/e4/479ee40ab9ae84e296b3c966783874a1.jpg');
     background-size: cover;
-    margin: 0;
-    padding: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     flex-direction: column;
-}
-
-#nickname-section,
-#game-section {
-    text-align: center;
-    margin-top: 20px;
-}
-
-input {
-    padding: 10px;
-    font-size: 16px;
-}
-
-.subscribe-button {
-    display: inline-block;
-    padding: 10px 20px;
-    margin: 10px;
-    background-color: #007bff;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.subscribe-button:hover {
-    background-color: #0056b3;
-}
-
-.counter {
-    display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
 }
 
-.counter img {
-    width: 50px;
-    height: 50px;
-    margin-right: 10px;
-}
-
-.tap-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-}
-
-.tap-button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    position: relative;
-}
-
-.tap-button img {
-    width: 128px;
-    height: 128px;
-}
-
-.energy {
-    font-size: 18px;
-    font-weight: bold;
+#tap-button img {
+    width: 100px;
+    height: 100px;
 }
 
 #tap-effect {
     position: absolute;
     width: 50px;
     height: 50px;
-    background: url('https://cdn-icons-png.flaticon.com/128/2470/2470166.png') no-repeat center center;
-    background-size: cover;
-    pointer-events: none;
-    opacity: 1;
-    transition: opacity 0.5s, transform 0.5s;
+    opacity: 0;
+    transition: transform 1s ease, opacity 1s ease;
 }
 
-.energy-timer {
-    font-size: 14px;
-    color: #ff0000;
+.energy {
+    margin-top: 10px;
 }
 
 #leaderboard {
     margin-top: 20px;
-    width: 100%;
-    max-width: 300px;
     border-collapse: collapse;
 }
 
 #leaderboard th, #leaderboard td {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid black;
 }
 
-#leaderboard th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+#nickname-section, #game-section {
+    text-align: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+img {
+    user-drag: none;
+    -webkit-user-drag: none;
+}
+
+body {
+    touch-action: manipulation;
 }
