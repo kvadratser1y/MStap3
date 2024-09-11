@@ -7,7 +7,6 @@ let nickname = localStorage.getItem('nickname');
 // Элементы DOM
 const tapCountElement = document.getElementById('tap-count');
 const energyCountElement = document.getElementById('energy-count');
-const energyTimerElement = document.getElementById('energy-timer');
 const nicknameDisplay = document.getElementById('nickname-display');
 const tapButton = document.getElementById('tap-button');
 const nicknameForm = document.getElementById('nickname-form');
@@ -15,7 +14,6 @@ const nicknameInput = document.getElementById('nickname-input');
 const errorMessage = document.getElementById('error-message');
 const gameSection = document.getElementById('game-section');
 const nicknameSection = document.getElementById('nickname-section');
-const leaderboardTable = document.getElementById('leaderboard').querySelector('tbody');
 
 // Добавляем элемент для эффекта
 const tapEffect = document.createElement('div');
@@ -32,7 +30,6 @@ if (nickname) {
     // Обновляем текст с тапами и энергией при загрузке страницы
     tapCountElement.textContent = tapCount;
     energyCountElement.textContent = energy;
-    updateLeaderboard(); // Обновляем таблицу лидеров
 
 } else {
     // Если ника нет, отображаем форму ввода ника
@@ -43,7 +40,6 @@ if (nickname) {
 const checkEnergyRefill = () => {
     const now = Date.now();
     const timePassed = now - lastEnergyRefill;
-    const timeRemaining = 3600000 - timePassed;
 
     // Если прошло больше часа (3600000 миллисекунд), восстанавливаем 5000 энергии
     if (timePassed >= 3600000) {
@@ -52,12 +48,6 @@ const checkEnergyRefill = () => {
         localStorage.setItem('lastEnergyRefill', lastEnergyRefill);
         localStorage.setItem('energy', energy);
         energyCountElement.textContent = energy;
-        energyTimerElement.textContent = ''; // Скрываем таймер, если энергия восстановлена
-    } else {
-        // Показываем таймер, сколько времени осталось до восстановления энергии
-        const minutes = Math.floor(timeRemaining / 60000);
-        const seconds = Math.floor((timeRemaining % 60000) / 1000);
-        energyTimerElement.textContent = `Энергия восстановится через: ${minutes} минут и ${seconds} секунд`;
     }
 };
 
@@ -85,15 +75,13 @@ tapButton.addEventListener('click', (e) => {
             tapEffect.style.opacity = 0;
             tapEffect.style.transform = 'translateY(-200px)';
         }, 50);
-
-        updateLeaderboard(); // Обновляем таблицу лидеров после каждого тапа
     } else {
         alert('Недостаточно энергии! Подождите или купите подписку.');
     }
 });
 
-// Проверяем восстановление энергии каждые 1 секунду
-setInterval(checkEnergyRefill, 1000);
+// Проверяем восстановление энергии каждые 10 секунд
+setInterval(checkEnergyRefill, 10000);
 
 // Проверка энергии при загрузке страницы
 checkEnergyRefill();
@@ -115,27 +103,3 @@ nicknameForm.addEventListener('submit', (e) => {
         errorMessage.textContent = 'Ник должен состоять из латинских букв и содержать максимум 2 цифры.';
     }
 });
-
-// Обновляем таблицу лидеров
-function updateLeaderboard() {
-    const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || {};
-    leaderboardData[nickname] = tapCount;
-
-    // Сохраняем обновленные данные в localStorage
-    localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
-
-    // Очищаем таблицу
-    leaderboardTable.innerHTML = '';
-
-    // Заполняем таблицу новыми данными
-    for (const player in leaderboardData) {
-        const row = document.createElement('tr');
-        const nameCell = document.createElement('td');
-        const tapsCell = document.createElement('td');
-        nameCell.textContent = player;
-        tapsCell.textContent = leaderboardData[player];
-        row.appendChild(nameCell);
-        row.appendChild(tapsCell);
-        leaderboardTable.appendChild(row);
-    }
-}
