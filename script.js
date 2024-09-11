@@ -17,13 +17,15 @@ const gameSection = document.getElementById('game-section');
 const nicknameSection = document.getElementById('nickname-section');
 const leaderboardTable = document.getElementById('leaderboard').querySelector('tbody');
 
-// Элемент для эффекта нажатия
-const tapEffect = document.getElementById('tap-effect');
+// Добавляем элемент для эффекта
+const tapEffect = document.createElement('div');
+tapEffect.id = 'tap-effect';
+document.body.appendChild(tapEffect);
 
 // Проверяем, есть ли ник в localStorage
 if (nickname) {
     // Переходим сразу в игру, если ник уже сохранен
-    nicknameDisplay.textContent = `Your Nickname: ${nickname}`;
+    nicknameDisplay.textContent = `Ваш ник: ${nickname}`;
     nicknameSection.style.display = 'none';
     gameSection.style.display = 'block';
 
@@ -43,6 +45,7 @@ const checkEnergyRefill = () => {
     const timePassed = now - lastEnergyRefill;
     const timeRemaining = 3600000 - timePassed;
 
+    // Если прошло больше часа (3600000 миллисекунд), восстанавливаем 5000 энергии
     if (timePassed >= 3600000) {
         energy = 5000;
         lastEnergyRefill = now;
@@ -51,13 +54,14 @@ const checkEnergyRefill = () => {
         energyCountElement.textContent = energy;
         energyTimerElement.textContent = ''; // Скрываем таймер, если энергия восстановлена
     } else {
+        // Показываем таймер, сколько времени осталось до восстановления энергии
         const minutes = Math.floor(timeRemaining / 60000);
         const seconds = Math.floor((timeRemaining % 60000) / 1000);
-        energyTimerElement.textContent = `Energy refills in: ${minutes}m ${seconds}s`;
+        energyTimerElement.textContent = `Энергия восстановится через: ${minutes} минут и ${seconds} секунд`;
     }
 };
 
-// Функция обработки нажатий
+// Обновляем количество тапов и энергию
 tapButton.addEventListener('click', (e) => {
     if (energy > 0) {
         tapCount++;
@@ -66,44 +70,49 @@ tapButton.addEventListener('click', (e) => {
         tapCountElement.textContent = tapCount;
         energyCountElement.textContent = energy;
 
+        // Сохраняем в localStorage
         localStorage.setItem('tapCount', tapCount);
         localStorage.setItem('energy', energy);
 
         // Показ эффекта нажатия
         const { left, top } = e.target.getBoundingClientRect();
-        tapEffect.style.left = `${left + e.target.clientWidth / 2 - 25}px`;
-        tapEffect.style.top = `${top + e.target.clientHeight / 2 - 25}px`;
+        tapEffect.style.left = `${left + e.target.clientWidth / 2 - 25}px`; // Центрируем по горизонтали
+        tapEffect.style.top = `${top + e.target.clientHeight / 2 - 25}px`; // Центрируем по вертикали
         tapEffect.style.opacity = 1;
         tapEffect.style.transform = 'translateY(-100px)';
 
         setTimeout(() => {
             tapEffect.style.opacity = 0;
             tapEffect.style.transform = 'translateY(-200px)';
-        }, 500);
+        }, 50);
 
         updateLeaderboard(); // Обновляем таблицу лидеров после каждого тапа
     } else {
-        alert('Out of energy! Wait or purchase a subscription.');
+        alert('Недостаточно энергии! Подождите или купите подписку.');
     }
 });
 
 // Проверяем восстановление энергии каждые 1 секунду
 setInterval(checkEnergyRefill, 1000);
 
+// Проверка энергии при загрузке страницы
+checkEnergyRefill();
+
 // Обработка формы для выбора ника
 nicknameForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const inputNickname = nicknameInput.value.trim();
 
+    // Проверка на валидность ника (латинские буквы и максимум 2 цифры)
     const nicknameRegex = /^[a-zA-Z]{1,8}[0-9]{0,2}$/;
 
     if (nicknameRegex.test(inputNickname)) {
         localStorage.setItem('nickname', inputNickname);
-        localStorage.setItem('tapCount', 0);
-        localStorage.setItem('energy', 5000);
-        window.location.reload();
+        localStorage.setItem('tapCount', 0); // Обнуляем счетчик для нового пользователя
+        localStorage.setItem('energy', 5000); // Восстанавливаем энергию
+        window.location.reload(); // Перезагружаем страницу, чтобы ник обновился
     } else {
-        errorMessage.textContent = 'Nickname must contain only letters and up to 2 digits.';
+        errorMessage.textContent = 'Ник должен состоять из латинских букв и содержать максимум 2 цифры.';
     }
 });
 
@@ -112,10 +121,13 @@ function updateLeaderboard() {
     const leaderboardData = JSON.parse(localStorage.getItem('leaderboard')) || {};
     leaderboardData[nickname] = tapCount;
 
+    // Сохраняем обновленные данные в localStorage
     localStorage.setItem('leaderboard', JSON.stringify(leaderboardData));
 
+    // Очищаем таблицу
     leaderboardTable.innerHTML = '';
 
+    // Заполняем таблицу новыми данными
     for (const player in leaderboardData) {
         const row = document.createElement('tr');
         const nameCell = document.createElement('td');
