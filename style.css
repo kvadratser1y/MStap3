@@ -1,3 +1,4 @@
+/* Стили для страницы */
 body {
     font-family: 'Montserrat', sans-serif;
     background-image: url('https://i.pinimg.com/564x/47/9e/e4/479ee40ab9ae84e296b3c966783874a1.jpg');
@@ -11,11 +12,13 @@ body {
     overflow: hidden;
 }
 
+/* Стили для кнопки */
 #tap-button img {
     width: 100px;
     height: 100px;
 }
 
+/* Эффект нажатия */
 #tap-effect {
     position: absolute;
     width: 50px;
@@ -24,10 +27,7 @@ body {
     transition: transform 1s ease, opacity 1s ease;
 }
 
-.energy {
-    margin-top: 10px;
-}
-
+/* Стили для таблицы */
 #leaderboard {
     margin-top: 20px;
     border-collapse: collapse;
@@ -38,19 +38,12 @@ body {
     border: 1px solid black;
 }
 
+/* Стили для секций */
 #nickname-section, #game-section {
     text-align: center;
 }
 
-button {
-    cursor: pointer;
-}
-
-img {
-    user-drag: none;
-    -webkit-user-drag: none;
-}
-
+/* Убираем возможность зума на мобильных устройствах */
 body {
     touch-action: manipulation;
 }
