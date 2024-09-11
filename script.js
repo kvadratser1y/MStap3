@@ -9,33 +9,16 @@ const tapCountElement = document.getElementById('tap-count');
 const energyCountElement = document.getElementById('energy-count');
 const nicknameDisplay = document.getElementById('nickname-display');
 const tapButton = document.getElementById('tap-button');
-const leaderboardTable = document.getElementById('leaderboard-table');
 const nicknameForm = document.getElementById('nickname-form');
 const nicknameInput = document.getElementById('nickname-input');
 const errorMessage = document.getElementById('error-message');
 const gameSection = document.getElementById('game-section');
 const nicknameSection = document.getElementById('nickname-section');
-const leaderboardSection = document.getElementById('leaderboard-section');
 
 // Добавляем элемент для эффекта
 const tapEffect = document.createElement('div');
 tapEffect.id = 'tap-effect';
 document.body.appendChild(tapEffect);
-
-// Отображение таблицы лидеров
-const updateLeaderboard = () => {
-    const leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
-    leaderboardTable.innerHTML = '';
-
-    // Сортируем таблицу по количеству тапов
-    const sortedLeaderboard = Object.entries(leaderboard).sort((a, b) => b[1] - a[1]);
-
-    sortedLeaderboard.forEach(([nickname, taps]) => {
-        const row = document.createElement('tr');
-        row.innerHTML = `<td>${nickname}</td><td>${taps}</td>`;
-        leaderboardTable.appendChild(row);
-    });
-};
 
 // Проверяем, есть ли ник в localStorage
 if (nickname) {
@@ -43,14 +26,11 @@ if (nickname) {
     nicknameDisplay.textContent = `Ваш ник: ${nickname}`;
     nicknameSection.style.display = 'none';
     gameSection.style.display = 'block';
-    leaderboardSection.style.display = 'block';
 
     // Обновляем текст с тапами и энергией при загрузке страницы
     tapCountElement.textContent = tapCount;
     energyCountElement.textContent = energy;
 
-    // Обновляем таблицу лидеров
-    updateLeaderboard();
 } else {
     // Если ника нет, отображаем форму ввода ника
     nicknameSection.style.display = 'block';
@@ -83,14 +63,6 @@ tapButton.addEventListener('click', (e) => {
         // Сохраняем в localStorage
         localStorage.setItem('tapCount', tapCount);
         localStorage.setItem('energy', energy);
-
-        // Сохраняем прогресс по нику
-        let leaderboard = JSON.parse(localStorage.getItem('leaderboard')) || {};
-        leaderboard[nickname] = tapCount;
-        localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
-
-        // Обновляем таблицу лидеров
-        updateLeaderboard();
 
         // Показ эффекта нажатия
         const { left, top } = e.target.getBoundingClientRect();
