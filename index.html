@@ -1,46 +1,55 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Tap Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
+
+    <!-- Секция для ввода ника -->
     <div id="nickname-section">
-        <h2>Choose your nickname</h2>
+        <h2>Введите ваш ник (только латинские символы и максимум 2 цифры):</h2>
         <form id="nickname-form">
-            <input type="text" id="nickname-input" maxlength="10" placeholder="Enter nickname">
-            <button type="submit">Save Nickname</button>
+            <input type="text" id="nickname-input" maxlength="10" required>
+            <button type="submit" class="subscribe-button">Сохранить</button>
         </form>
-        <p id="error-message"></p>
+        <p id="error-message" style="color: red;"></p>
     </div>
 
+    <!-- Секция игры (сначала скрыта) -->
     <div id="game-section" style="display: none;">
-        <h1 id="nickname-display">Your Nickname: </h1>
-        <div class="energy">
-            <p>Energy: <span id="energy-count">5000</span></p>
-            <p id="energy-timer"></p>
+        <h2 id="nickname-display"></h2>
+        <div class="counter">
+            <img src="https://cdn-icons-png.flaticon.com/128/12546/12546441.png" alt="icon">
+            <p>Тапов: <span id="tap-count">0</span></p>
         </div>
-        <button id="tap-button">
-            <img src="https://cdn-icons-png.flaticon.com/128/1275/1275098.png" alt="Tap Icon">
-        </button>
-        <p>Taps: <span id="tap-count">0</span></p>
-        <table id="leaderboard">
-            <thead>
-                <tr>
-                    <th>Nickname</th>
-                    <th>Taps</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <div class="tap-container">
+            <button class="tap-button" id="tap-button">
+                <img src="https://cdn-icons-png.flaticon.com/128/1275/1275098.png" alt="tap-icon">
+            </button>
+        </div>
+        <p class="energy">Энергия: <span id="energy-count">5000</span></p>
+        <p id="energy-timer" class="energy-timer"></p>
+        <a href="https://paypal.com" class="subscribe-button">Купить подписку</a>
+
+        <!-- Секция для таблицы лидеров -->
+        <div id="leaderboard-section">
+            <h3>Таблица лидеров</h3>
+            <table id="leaderboard">
+                <thead>
+                    <tr>
+                        <th>Ник</th>
+                        <th>Тапов</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
     </div>
 
-    <!-- Div для эффекта нажатия -->
-    <div id="tap-effect">
-        <img src="https://cdn-icons-png.flaticon.com/128/2470/2470166.png" alt="Tap Effect">
-    </div>
+    <script src="script.js"></script>
 </body>
 </html>
