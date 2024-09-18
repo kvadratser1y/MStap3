@@ -1,52 +1,57 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const tapArea = document.getElementById('tapArea');
-    const tapCountElem = document.getElementById('tapCount');
-    const energyCountElem = document.getElementById('energyCount');
-    const timerCountElem = document.getElementById('timerCount');
-    const subscribeBtn = document.getElementById('subscribeBtn');
+let taps = 0;
+let energy = 100;
+let lastTapTime = new Date();
 
-    let tapCount = 0;
-    let energy = 5000;
-    const energyRegenTime = 3600; // seconds
-    let lastTapTime = Date.now();
-    let regenerationTimer = null;
+const tapButton = document.getElementById('tapButton');
+const tapCountElement = document.getElementById('tapCount');
+const energyElement = document.getElementById('energy');
+const rankElement = document.getElementById('rank');
+const resetTimerElement = document.getElementById('resetTimer');
 
-    const updateDisplay = () => {
-        tapCountElem.textContent = tapCount;
-        energyCountElem.textContent = energy;
-        const timeLeft = Math.max(0, Math.floor((lastTapTime + energyRegenTime * 1000 - Date.now()) / 1000));
-        timerCountElem.textContent = timeLeft;
-        if (timeLeft <= 0 && regenerationTimer === null) {
-            regenerateEnergy();
-        }
-    };
-
-    const regenerateEnergy = () => {
-        regenerationTimer = setInterval(() => {
-            energy = Math.min(5000, energy + 100); // Regenerate 100 energy per second
-            if (energy >= 5000) {
-                clearInterval(regenerationTimer);
-                regenerationTimer = null;
-            }
-            updateDisplay();
-        }, 1000);
-    };
-
-    tapArea.addEventListener('click', () => {
-        const now = Date.now();
-        if (energy > 0) {
-            tapCount++;
-            energy--;
-            lastTapTime = now;
-            updateDisplay();
-        } else if (regenerationTimer === null) {
-            updateDisplay();
-        }
-    });
-
-    subscribeBtn.addEventListener('click', () => {
-        window.location.href = 'https://www.paypal.com';
-    });
-
-    updateDisplay();
+tapButton.addEventListener('click', () => {
+    if (energy > 0) {
+        taps++;
+        energy--;
+        updateDisplay();
+        lastTapTime = new Date();
+    }
 });
+
+function updateDisplay() {
+    tapCountElement.textContent = taps;
+    energyElement.textContent = energy;
+    rankElement.textContent = calculateRank();
+}
+
+function calculateRank() {
+    if (taps >= 1000000000) return 'Hellsteel🔥';
+    if (taps >= 100000000) return 'Diamond💎';
+    if (taps >= 1000000) return 'Gold🥇';
+    if (taps >= 100000) return 'Iron🛠️';
+    if (taps >= 10000) return 'Copper🥉';
+    return 'Bronze🟫';
+}
+
+setInterval(() => {
+    if (energy < 100) {
+        energy++;
+        updateDisplay();
+    }
+
+    const now = new Date();
+    const timeSinceLastTap = (now - lastTapTime) / 1000; // in seconds
+    const timeUntilReset = 24 * 60 * 60 - timeSinceLastTap;
+    
+    if (timeUntilReset <= 0) {
+        taps = 0;
+        updateDisplay();
+        lastTapTime = now;
+    } else {
+        const hours = Math.floor(timeUntilReset / 3600);
+        const minutes = Math.floor((timeUntilReset % 3600) / 60);
+        const seconds = Math.floor(timeUntilReset % 60);
+        resetTimerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+    }
+}, 1000);
+
+// Здесь можно добавить логику для промокодов, кейсов и таблицы лидеров
