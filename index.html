@@ -8,12 +8,13 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="loading">
-        <img src="https://example.com/loading.gif" alt="Loading...">
+    <div id="qrCode">
+        <img src="https://qr.io/qr-svg/jS8Ume.svg?1726655743946" alt="QR Code">
+        <p>Play on mobile. It's better 📱</p>
     </div>
-    
-    <div id="game" style="display: none;">
-        <div id="username">Your nickname: <span id="userNickname"></span></div>
+
+    <div id="game">
+        <div id="username">Ваш никнейм: <span id="userNickname"></span></div>
         <div id="stats">
             <p>Taps: <span id="tapCount">0</span> 🖱️</p>
             <p>Energy: <span id="energy">5000</span> ⚡</p>
@@ -48,32 +49,38 @@
         </div>
     </div>
 
-    <div id="casesPage" class="page" style="display: none;">
+    <div id="casesPage" class="page">
+        <button class='close-btn' onclick='closePage()'>X</button>
         <h2>Cases 📦</h2>
-        <!-- Add cases content here -->
+        <!-- Содержимое страницы кейсов -->
     </div>
 
-    <div id="promoPage" class="page" style="display: none;">
+    <div id="promoPage" class="page">
+        <button class='close-btn' onclick='closePage()'>X</button>
         <h2>Promo Codes 🎟️</h2>
-        <!-- Add promo code content here -->
+        <!-- Содержимое страницы промокодов -->
     </div>
 
-    <div id="leaderboardPage" class="page" style="display: none;">
+    <div id="leaderboardPage" class="page">
+        <button class='close-btn' onclick='closePage()'>X</button>
         <h2>Leaderboard 🏆</h2>
-        <!-- Add leaderboard content here -->
+        <!-- Содержимое страницы таблицы лидеров -->
     </div>
 
-    <div id="dailyPage" class="page" style="display: none;">
+    <div id="dailyPage" class="page">
+        <button class='close-btn' onclick='closePage()'>X</button>
         <h2>Daily Bonus 🎁</h2>
-        <!-- Add daily bonus content here -->
+        <div id="dailyRewards"></div>
     </div>
 
-    <div id="qrCode">
-        <img src="https://qr.io/qr-svg/jS8Ume.svg?1726655743946" alt="QR Code">
-        <p>Play on mobile. It's better 📱</p>
+    <div id="nicknameModal" class="modal">
+        <div class="modal-content">
+            <h2>Enter your nickname:</h2>
+            <input type="text" id="nicknameInput" placeholder="Type your nickname here">
+            <button onclick="saveNickname()">Save</button>
+        </div>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
