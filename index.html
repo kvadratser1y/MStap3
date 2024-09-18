@@ -7,18 +7,36 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <div class="background"></div>
-        <div class="content">
-            <div class="tap-area" id="tapArea">
-                <img src="https://cdn-icons-png.flaticon.com/128/1275/1275098.png" alt="Tap Icon" class="tap-icon">
+    <div id="game">
+        <div id="stats">
+            <p>Taps: <span id="tapCount">0</span></p>
+            <p>Energy: <span id="energy">100</span></p>
+            <p>Rank: <span id="rank">Bronze🟫</span></p>
+            <p>Time until reset: <span id="resetTimer">24:00:00</span></p>
+        </div>
+        <button id="tapButton">
+            <img src="https://cdn-icons-png.flaticon.com/128/882/882791.png" alt="Tap">
+        </button>
+        <div id="menu">
+            <div class="menu-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/3917/3917033.png" alt="Home">
+                <span>Home</span>
             </div>
-            <p id="count">Times Tapped: <img src="https://cdn-icons-png.flaticon.com/128/1275/1275098.png" alt="Tap Icon" class="count-icon"> <span id="tapCount">0</span></p>
-            <p id="energy">Energy: <img src="https://cdn-icons-png.flaticon.com/128/1275/1275098.png" alt="Energy Icon" class="count-icon"> <span id="energyCount">5000</span></p>
-            <p id="timer">Energy Regeneration Time: <span id="timerCount">3600</span> seconds</p>
-            <button id="subscribeBtn">Buy Subscription</button>
+            <div class="menu-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/3916/3916598.png" alt="Cases">
+                <span>Cases</span>
+            </div>
+            <div class="menu-item">
+                <img src="https://cdn-icons-png.flaticon.com/128/5527/5527871.png" alt="Promo">
+                <span>Promo</span>
+            </div>
         </div>
     </div>
+    <div id="qrCode">
+        <img src="https://qr.io/qr-svg/jS8Ume.svg?1726655743946" alt="QR Code">
+        <p>Play on mobile. It's better</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
