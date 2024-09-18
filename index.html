@@ -2,42 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Tap Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="game">
+    <div id="loading">
+        <img src="https://example.com/loading.gif" alt="Loading...">
+    </div>
+    
+    <div id="game" style="display: none;">
+        <div id="username">Your nickname: <span id="userNickname"></span></div>
         <div id="stats">
-            <p>Taps: <span id="tapCount">0</span></p>
-            <p>Energy: <span id="energy">100</span></p>
+            <p>Taps: <span id="tapCount">0</span> 🖱️</p>
+            <p>Energy: <span id="energy">5000</span> ⚡</p>
             <p>Rank: <span id="rank">Bronze🟫</span></p>
-            <p>Time until reset: <span id="resetTimer">24:00:00</span></p>
+            <p>Time until reset: <span id="resetTimer">24:00:00</span> ⏰</p>
+            <p>Rebirths: <span id="rebirths">0</span> 🔄</p>
         </div>
         <button id="tapButton">
             <img src="https://cdn-icons-png.flaticon.com/128/882/882791.png" alt="Tap">
         </button>
         <div id="menu">
-            <div class="menu-item">
+            <div class="menu-item" data-page="home">
                 <img src="https://cdn-icons-png.flaticon.com/128/3917/3917033.png" alt="Home">
                 <span>Home</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item" data-page="cases">
                 <img src="https://cdn-icons-png.flaticon.com/128/3916/3916598.png" alt="Cases">
                 <span>Cases</span>
             </div>
-            <div class="menu-item">
+            <div class="menu-item" data-page="promo">
                 <img src="https://cdn-icons-png.flaticon.com/128/5527/5527871.png" alt="Promo">
                 <span>Promo</span>
             </div>
+            <div class="menu-item" data-page="leaderboard">
+                <img src="https://cdn-icons-png.flaticon.com/128/25/25617.png" alt="Leaderboard">
+                <span>Leaderboard</span>
+            </div>
+            <div class="menu-item" data-page="daily">
+                <img src="https://cdn-icons-png.flaticon.com/128/372/372768.png" alt="Daily Bonus">
+                <span>Daily</span>
+            </div>
         </div>
     </div>
+
+    <div id="casesPage" class="page" style="display: none;">
+        <h2>Cases 📦</h2>
+        <!-- Add cases content here -->
+    </div>
+
+    <div id="promoPage" class="page" style="display: none;">
+        <h2>Promo Codes 🎟️</h2>
+        <!-- Add promo code content here -->
+    </div>
+
+    <div id="leaderboardPage" class="page" style="display: none;">
+        <h2>Leaderboard 🏆</h2>
+        <!-- Add leaderboard content here -->
+    </div>
+
+    <div id="dailyPage" class="page" style="display: none;">
+        <h2>Daily Bonus 🎁</h2>
+        <!-- Add daily bonus content here -->
+    </div>
+
     <div id="qrCode">
         <img src="https://qr.io/qr-svg/jS8Ume.svg?1726655743946" alt="QR Code">
-        <p>Play on mobile. It's better</p>
+        <p>Play on mobile. It's better 📱</p>
     </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
