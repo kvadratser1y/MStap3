@@ -53,5 +53,3 @@ setInterval(() => {
         resetTimerElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     }
 }, 1000);
-
-// Здесь можно добавить логику для промокодов, кейсов и таблицы лидеров
